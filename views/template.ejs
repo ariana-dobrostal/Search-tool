@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <meta charset="utf-8">
+    <title>Search Tool</title>
+
+    <style>
+
+        #all{
+            display: grid;
+            grid-template-columns: 40% 60%;
+            margin: auto;
+            background-color:rgb(238, 187, 238);
+        }
+        #group{
+            padding: 6px;
+            margin: 6px;
+        }
+        #spaces{
+            padding: 5px;
+        }
+
+        .border{
+            border-left: white solid 8px;
+            text-align: center;
+            object-fit: cover;
+        }
+
+        .scrollbox{
+            width: 700px;
+            height: 500px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+
+        .boldness{
+            font-weight: bold;
+        }
+
+        .center{
+            text-align: center;
+        }
+
+        .pic{
+            width: 250px;
+            height: 250px;
+            border: white solid 5px;
+        }
+
+        .red{
+            background-color:lightCoral;
+        }
+        .orange{
+            background-color:rgb(253, 175, 146);
+        }
+        .yellow{
+            background-color:khaki;
+        }
+        .green{
+            background-color:palegreen;
+        }
+        .blue{
+            background-color:paleturquoise;
+        }
+        .purple{
+            background-color:rgb(209, 157, 247);
+        }
+
+    </style>
+
+</head>
+  
+<body>
+    <div id="all">
+        <div id="group">
+            <h1>Search Tool</h1>
+    
+            <form action="/" method="post">
+
+                <!-- Category -->
+                <div id="group">
+                    <label for="category">Category: </label>
+                    <select name="category" id="category">
+                        <option value="-1">All</option>
+                        <option value="0">Animals</option>
+                        <option value="1">Faces</option>
+                        <option value="2">Landscapes</option>
+                        <option value="3">Objects</option>
+                        <option value="4">People</option>
+                    </select>
+                </div>
+
+
+                <!-- Keywords -->
+                <div id="group">
+                    <div>
+                        <label for="keywords">Keywords: </label>
+                        <input type="text" name="keywords" placeholder="Type in keywords">
+                    </div>
+                    <!-- Conditions -->
+                    <div>
+                        <input type="radio" id="atleastone" name="condition" value="atleastone">
+                        <label for="atleastone">At least one keyword</label><br>
+                        <input type="radio" id="allofthem" name="condition" value="allofthem">
+                        <label for="allofthem">All keywords</label><br>
+                    </div>
+                </div>
+        
+
+                <!-- Emotions -->
+                <div id="group">
+                    <label class="boldness">Emotions</label>
+                    <div id="spaces">
+                        <label>Search emotional intervals for:</label><br>
+                        <input type="radio" id="emo_all" name="emo_group" value="emo_all">
+                        <label for="emo_all">Everyone</label><br>
+                        <input type="radio" id="emo_women" name="emo_group" value="emo_women">
+                        <label for="emo_women">Women</label><br>
+                        <input type="radio" id="emo_men" name="emo_group" value="emo_men">
+                        <label for="emo_men">Men</label><br>
+                    </div>
+
+                    <!-- Dimentional emotions -->
+                    <div id="group">
+                        <label class="boldness">Dimentional emotions</label><br>
+                        <!-- Valence -->
+                        <div id="spaces">
+                            <label for="valence">Valence</label><br>
+                            <div id="spaces">
+                                <input type="number" name="val_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="val_mean"> <= Mean <= </label>
+                                <input type="number" name="val_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="val_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="val_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="val_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div> 
+                        <!-- Arousal -->
+                        <div id="spaces">
+                            <label for="arousal">Arousal</label><br>
+                            <div id="spaces">
+                                <input type="number" name="aro_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="aro_mean"> <= Mean <= </label>
+                                <input type="number" name="aro_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="aro_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="aro_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="aro_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div> 
+                    </div>
+        
+                    <!-- Basic emotions -->
+                    <div id="group">
+                        <label class="boldness">Basic emotions</label><br>
+                        <!-- Anger -->
+                        <div id="spaces" class="red" class="radius">
+                            <label for="anger">Anger</label><br>
+                            <div id="spaces">
+                                <input type="number" name="anger_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="anger_mean"> <= Mean <= </label>
+                                <input type="number" name="anger_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="anger_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="anger_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="anger_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div>
+                        <!-- Surprise -->
+                        <div id="spaces" class="orange" class="radius>
+                            <label for="surprise">Surprise</label><br>
+                            <div id="spaces">
+                                <input type="number" name="surprise_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="surprise_mean"> <= Mean <= </label>
+                                <input type="number" name="surprise_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="surprise_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="surprise_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="surprise_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div>
+                        <!-- Joy -->
+                        <div id="spaces" class="yellow" class="radius>
+                            <label for="joy">Joy</label><br>
+                            <div id="spaces">
+                                <input type="number" name="joy_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="joy_mean"> <= Mean <= </label>
+                                <input type="number" name="joy_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="joy_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="joy_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="joy_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div>
+                        <!-- Disgust -->
+                        <div id="spaces" class="green" class="radius>
+                            <label for="disgust">Disgust</label><br>
+                            <div id="spaces">
+                                <input type="number" name="disgust_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="disgust_mean"> <= Mean <= </label>
+                                <input type="number" name="disgust_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="disgust_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="disgust_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="disgust_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div>
+                        <!-- Sadness -->
+                        <div id="spaces" class="blue" class="radius>
+                            <label for="sadness">Sadness</label><br>
+                            <div id="spaces">
+                                <input type="number" name="sadness_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="sadness_mean"> <= Mean <= </label>
+                                <input type="number" name="sadness_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="sadness_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="sadness_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="sadness_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div>
+                        <!-- Fear -->
+                        <div id="spaces" class="purple" class="radius>
+                            <label for="fear">Fear</label><br>
+                            <div id="spaces">
+                                <input type="number" name="fear_mean_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="fear_mean"> <= Mean <= </label>
+                                <input type="number" name="fear_mean_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                            <div id="spaces">
+                                <input type="number" name="fear_sd_before" min="0" max="9" step=".01" value="0.00"/>
+                                <label for="fear_sd"> <= Standard deviation <= </label>
+                                <input type="number" name="fear_sd_after" min="0" max="9" step=".01" value="9.00"/>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+        
+                <!-- Name and number -->
+                <div id="group">
+                    <div id="spaces">
+                        <label for="number">Number:</label>
+                        <input type="number" name="number" min="1" placeholder="1"/>    
+                    </div>
+                    <div id="spaces">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" placeholder="Type in the picture's name">
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" name="submit" id="group">Find pictures</button>
+            </form>
+        </div>
+        
+
+        <div id="group" class="border">
+
+            <form action="/result" method="post">
+
+                <div>
+                    <% if (pictures) { %>
+                        <% if (pictures.length != 0) { %>
+                            <div class="scrollbox">
+                                <% for(var i=0; i<pictures.length; i++){ %>
+                                    <div>
+                                        <input type="checkbox" name="chosen" value="<%= pictures[i].ID %>"/>
+                                        <label for="<%= pictures[i].ID %>"><img src="<%= pictures[i].Path %>" class="pic"/></label>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+
+                <% if (pictures) { %>
+                    <% if (pictures.length == 0) { %>
+                        <h1 id="spaces" class="center">No pictures match your search</h1>
+                    <% } %>
+                <% } %>
+
+                <% if (pictures) { %>
+                    <% if (pictures.length != 0) { %>
+                        <button type="submit" name="submit" id="group">Choose pictures</button>
+                    <% } %>
+                <% } %>
+                
+            </form>
+
+            <% if (results) { %>
+                <% if (results.length != 0) { %>
+                    <h1 id="spaces" class="center">You chose the following pictures: </h1>
+                <% } %>
+            <% } %>
+
+            <div>
+                <% if (results) { %>
+                    <% if (results.length != 0) { %>
+                        <div class="scrollbox">
+                   
+                            <% for(var i=0; i<results.length; i++){ %>
+                                <div>
+                                    <img src="<%= results[i].Path %>" class="pic"/>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+
+            <% if (results) { %>
+                <% if (results.length == 0) { %>
+                    <h1 id="spaces" class="center">You chose no pictures</h1>
+                <% } %>
+            <% } %>
+            
+        </div>
+        
+    </div>
+    
+</body>
+  
+</html>
