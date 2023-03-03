@@ -29,7 +29,7 @@
 
         .scrollbox{
             width: 700px;
-            height: 500px;
+            height: 450px;
             overflow-y: auto;
             display: grid;
             grid-template-columns: 50% 50%;
@@ -290,7 +290,13 @@
 
                 <% if (pictures) { %>
                     <% if (pictures.length != 0) { %>
-                        <button type="submit" name="submit" id="group">Choose pictures</button>
+                        <div id="group">
+                            <div id="spaces">
+                                <label for="foldername">Folder name:</label>
+                                <input type="text" name="foldername" placeholder="Type in the folder's name" required>
+                            </div>
+                            <button type="submit" name="submit" id="group">Create folder</button>
+                        </div>
                     <% } %>
                 <% } %>
                 
